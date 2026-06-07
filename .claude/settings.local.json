@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Force)",
+      "Bash(Select-Object Name, Mode, LastWriteTime)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(python -c \"import sys; print\\(sys.version\\)\")",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "PowerShell(New-Item *)",
+      "PowerShell(Get-Process *)"
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "category": "asosiy",
+    "title": "Qandli diabet nima?",
+    "content": "Qandli diabet - bu qondagi glyukoza (shakar) darajasi me'yordan yuqori bo'lgan surunkali kasallik. Bu insulin ishlab chiqarilmasligi yoki to'g'ri ishlamasligi natijasida yuzaga keladi. Insulin - bu qondagi shakarni hujayralarga o'tkazishga yordam beradigan gormon."
+  },
+  {
+    "category": "turlar",
+    "title": "1-tur diabet",
+    "content": "1-tur diabetda oshqozon osti bezi insulin ishlab chiqarmaydi. Bu ko'pincha bolalar va yoshlarda uchraydi. Davolash: kundalik insulin in'eksiyalari, qondagi shakar darajasini muntazam tekshirish, sog'lom ovqatlanish va jismoniy faollik."
+  },
+  {
+    "category": "turlar",
+    "title": "2-tur diabet",
+    "content": "2-tur diabetda tananing hujayralari insulinga to'g'ri javob bermaydi (insulin qarshiligi). Bu kattalar orasida eng keng tarqalgan tur. Davolash: sog'lom ovqatlanish, vazn yo'qotish, jismoniy mashqlar, dori-darmonlar va ba'zan insulin."
+  },
+  {
+    "category": "belgilar",
+    "title": "Diabet belgilari",
+    "content": "Asosiy belgilar: tez-tez chanqash, ko'p siyish, tez charchash, ko'rish buzilishi, yaralar sekin bitishi, og'irlik yo'qotish (1-tur), qo'l-oyoqlarda uyqusizlik. Agar bu belgilar bo'lsa, darhol shifokorga murojaat qiling."
+  },
+  {
+    "category": "ovqatlanish",
+    "title": "Diabetda ovqatlanish",
+    "content": "Tavsiya etiladigan ovqatlar: to'liq donli mahsulotlar, sabzavotlar, mevalar (cheklangan miqdorda), yog'siz go'sht, baliq, dukkakli o'simliklar, yong'oqlar. Cheklash kerak: shakar, oq un, shirinliklar, gazlangan ichimliklar, yog'li ovqatlar. Ovqatni kichik qismlarda, kuniga 5-6 marta iste'mol qiling."
+  },
+  {
+    "category": "ovqatlanish",
+    "title": "Glikemik indeks",
+    "content": "Glikemik indeks (GI) - ovqatning qondagi shakar darajasiga ta'siri. Past GI ovqatlar (55 dan kam): ko'pchilik sabzavotlar, dukkakli o'simliklar, yong'oqlar, to'liq donli mahsulotlar. Yuqori GI ovqatlar (70 dan yuqori): oq non, guruch, kartoshka, shirinliklar. Diabetda past GI ovqatlarni tanlang."
+  },
+  {
+    "category": "glyukoza",
+    "title": "Glyukoza me'yori",
+    "content": "Qondagi glyukoza me'yori (mmol/L): Och qoringa: 4.0-5.5, Ovqatdan 2 soat keyin: 7.8 dan past, HbA1c (3 oylik o'rtacha): 6.5% dan past. Diabetda maqsad: Och qoringa: 4.0-7.0, Ovqatdan keyin: 10.0 dan past. Shifokoringiz bilan individual maqsadlarni belgilang."
+  },
+  {
+    "category": "glyukoza",
+    "title": "Gipoglikemiya (past shakar)",
+    "content": "Gipoglikemiya - qondagi shakar 3.9 mmol/L dan past tushishi. Belgilari: titroq, terlash, yurak urishi tezlashishi, bosh og'rig'i, chalkashlik. Darhol harakat qiling: 15-20g tez so'riladigan uglevodlar (4 ta shakar, 150ml sharbat), 15 daqiqadan keyin qayta tekshiring. Agar yaxshilanmasa, takrorlang va shifokorga murojaat qiling."
+  },
+  {
+    "category": "glyukoza",
+    "title": "Giperglikemiya (yuqori shakar)",
+    "content": "Giperglikemiya - qondagi shakar juda yuqori (13.9 mmol/L dan yuqori). Belgilari: chanqash, tez-tez siyish, charchash, ko'rish buzilishi, bosh og'rig'i. Harakat: ko'p suv iching, jismoniy faollik, dori-darmonlarni tekshiring. Agar 24 soatdan keyin yaxshilanmasa yoki 20 mmol/L dan yuqori bo'lsa, darhol shifokorga murojaat qiling."
+  },
+  {
+    "category": "asoratlar",
+    "title": "Diabetning asoratlari",
+    "content": "Uzoq muddatli asoratlar: Ko'z kasalliklari (retinopatiya), Buyrak kasalliklari (nefropatiya), Asab shikastlanishi (neyropatiya), Yurak-qon tomir kasalliklari, Oyoq muammolari. Oldini olish: qondagi shakarni nazorat qilish, muntazam tekshiruvlar, sog'lom turmush tarzi, qon bosimini nazorat qilish."
+  },
+  {
+    "category": "dorilar",
+    "title": "Insulin turlari",
+    "content": "Tez ta'sirli insulin: ovqatdan 15 daqiqa oldin, 2-4 soat ishlaydi. Qisqa ta'sirli insulin: ovqatdan 30 daqiqa oldin, 5-8 soat ishlaydi. O'rta ta'sirli insulin: kuniga 1-2 marta, 12-18 soat ishlaydi. Uzoq ta'sirli insulin: kuniga 1 marta, 24 soat ishlaydi. Shifokor tayinlagan dozani o'zgartirmang."
+  },
+  {
+    "category": "dorilar",
+    "title": "Og'izaki dorilar (2-tur diabet)",
+    "content": "Metformin: insulinga sezgirlikni oshiradi, jigar tomonidan glyukoza ishlab chiqarishni kamaytiradi. Sulfonilurea: oshqozon osti bezini ko'proq insulin ishlab chiqarishga undaydi. DPP-4 inhibitorlari: insulin ishlab chiqarishni oshiradi. SGLT2 inhibitorlari: buyraklar orqali shakar chiqarilishini oshiradi. Har bir dorining yon ta'siri bor, shifokor nazoratida qabul qiling."
+  },
+  {
+    "category": "hayot_tarzi",
+    "title": "Jismoniy faollik",
+    "content": "Jismoniy mashqlar insulinga sezgirlikni oshiradi va qondagi shakarni kamaytiradi. Tavsiyalar: haftada kamida 150 daqiqa o'rtacha intensivlikdagi mashqlar (tez yurish, suzish, velosiped), kuch mashqlari haftada 2-3 marta. Ehtiyot choralar: mashqdan oldin va keyin shakarni tekshiring, gipoglikemiya uchun tayyor bo'ling, shifokor bilan maslahatlashing."
+  },
+  {
+    "category": "hayot_tarzi",
+    "title": "Stress va uyqu",
+    "content": "Stress va yomon uyqu qondagi shakarni oshiradi. Stress boshqaruvi: nafas mashqlari, meditatsiya, yoga, sevimli mashg'ulotlar. Uyqu: kuniga 7-9 soat uxlang, muntazam uyqu rejimini saqlang, yotoqdan oldin ekranlarga qaramang. Yaxshi uyqu va kam stress diabetni nazorat qilishga yordam beradi."
+  },
+  {
+    "category": "monitoring",
+    "title": "Qondagi shakarni tekshirish",
+    "content": "Qachon tekshirish kerak: Och qoringa (ertalab), Ovqatdan oldin va 2 soat keyin, Uxlashdan oldin, Jismoniy mashqdan oldin va keyin, Kasal bo'lganingizda. Natijalarni daftarga yozing. Shifokoringiz bilan maqsad darajalarini belgilang va muntazam ko'rib turing."
+  },
+  {
+    "category": "monitoring",
+    "title": "HbA1c tahlili",
+    "content": "HbA1c - so'nggi 2-3 oylik o'rtacha qondagi shakar darajasi. Me'yor: 6.5% dan past (diabetsiz odamlarda 5.7% dan past). Diabetda maqsad: ko'pchilik bemorlar uchun 7% dan past, lekin individual. Har 3 oyda bir marta tekshiring. HbA1c 1% kamayishi asoratlar xavfini sezilarli darajada kamaytiradi."
+  },
+  {
+    "category": "maxsus",
+    "title": "Homiladorlik va diabet",
+    "content": "Gestatsion diabet - homiladorlik davrida paydo bo'ladigan diabet. Xavf omillari: ortiqcha vazn, 35 yoshdan katta, oilaviy tarix. Nazorat: ovqatlanish, jismoniy faollik, qondagi shakarni muntazam tekshirish, ba'zan insulin. Ko'pincha tug'ruqdan keyin yo'qoladi, lekin kelajakda 2-tur diabet xavfi ortadi. Homiladorlikni rejalashtirish va shifokor nazorati muhim."
+  },
+  {
+    "category": "maxsus",
+    "title": "Bolalarda diabet",
+    "content": "Bolalarda ko'proq 1-tur diabet uchraydi. Ota-onalar uchun maslahatlar: bolaga diabetni tushuntiring, maktabda o'qituvchilarni xabardor qiling, gipoglikemiya belgilarini bilib oling, sog'lom ovqatlanishni oilada qo'llab-quvvatlang, bolaning his-tuyg'ulariga e'tibor bering. Bolalar endokrinologi bilan muntazam ko'rining."
+  },
+  {
+    "category": "favqulodda",
+    "title": "Favqulodda holatlar",
+    "content": "Darhol tez tibbiy yordam chaqiring (103): Og'ir gipoglikemiya (hushidan ketish, tutqanoq), Diabetik ketoatsidoz (qondagi shakar 20+ mmol/L, nafas qiyin, qusish), Ko'rish to'satdan yo'qolishi, Ko'krak og'rig'i, Kuchli bosh og'rig'i. Har doim diabetik ekanligingizni ko'rsatuvchi narsani olib yuring."
+  },
+  {
+    "category": "oldini_olish",
+    "title": "2-tur diabetning oldini olish",
+    "content": "Xavf omillari: ortiqcha vazn, harakatsiz turmush tarzi, oilaviy tarix, 45 yoshdan katta, yuqori qon bosimi. Oldini olish: sog'lom vazn, muntazam jismoniy faollik, sog'lom ovqatlanish, stressni boshqarish, yomon odatlardan voz kechish (chekish, alkogol). Xavf guruhida bo'lsangiz, yiliga bir marta qondagi shakarni tekshiring."
+  }
+]
