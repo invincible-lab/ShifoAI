@@ -302,6 +302,25 @@ def get_reminders(user_id):
         r['active'] = bool(r.get('active'))
     return reminders
 
+def get_all_active_reminders():
+    """Barcha faol eslatmalarni foydalanuvchining telegram_id si bilan qaytaradi"""
+    conn = get_connection()
+    cursor = execute_query(conn, """
+        SELECT r.*, u.telegram_id 
+        FROM reminders r
+        JOIN users u ON u.id = r.user_id
+        WHERE r.active = 1
+    """)
+    reminders = [dict(r) for r in cursor.fetchall()]
+    conn.close()
+    for r in reminders:
+        if r.get('days_of_week'):
+            try:
+                r['days_of_week'] = json.loads(r['days_of_week'])
+            except (TypeError, ValueError):
+                pass
+    return reminders
+
 def toggle_reminder(user_id, reminder_id, active):
     """update() — eslatmani yoqish/o'chirish"""
     conn = get_connection()

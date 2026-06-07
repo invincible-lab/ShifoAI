@@ -63,6 +63,23 @@ export default function ProfilePage() {
       
       {message && <AlertBanner type={message.includes('Xato') ? 'danger' : 'success'} message={message} />}
       
+      {user && user.full_name && (
+        <div className="glass-card" style={{ marginBottom: '16px', background: 'var(--app-primary-gradient)', color: '#fff', border: 'none' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold' }}>
+              {user.full_name.charAt(0)}
+            </div>
+            <div>
+              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '700' }}>{user.full_name}</h3>
+              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9 }}>Yoshi: {user.age || 'Kiritilmagan'}</p>
+              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9 }}>
+                Diabet turi: {profile.diabetes_type === 'type1' ? '1-tip' : profile.diabetes_type === 'type2' ? '2-tip' : profile.diabetes_type === 'gestational' ? 'Gestatsion' : profile.diabetes_type || 'Kiritilmagan'}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="glass-card">
         <label className="form-label">Diabet turi</label>
         <select 

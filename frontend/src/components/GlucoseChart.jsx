@@ -24,12 +24,12 @@ export default function GlucoseChart({ data }) {
     <div style={{ width: '100%', height: 300, backgroundColor: 'var(--bg-color)', padding: '10px 0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', marginBottom: '20px' }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="var(--hint-color)" opacity={0.2} />
-          <XAxis dataKey="time" stroke="var(--hint-color)" fontSize={12} tickMargin={10} angle={-45} textAnchor="end" />
-          <YAxis stroke="var(--hint-color)" fontSize={12} domain={[0, 'dataMax + 5']} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#ffffff" opacity={0.2} />
+          <XAxis dataKey="time" stroke="#ffffff" fontSize={12} tickMargin={10} angle={-45} textAnchor="end" />
+          <YAxis stroke="#ffffff" fontSize={12} domain={[0, 'dataMax + 5']} />
           <Tooltip 
-            contentStyle={{ backgroundColor: 'var(--secondary-bg-color)', borderColor: 'var(--hint-color)', borderRadius: '8px', color: 'var(--text-color)' }}
-            labelStyle={{ fontWeight: 'bold', color: 'var(--text-color)', marginBottom: '5px' }}
+            contentStyle={{ backgroundColor: 'var(--tg-secondary-bg-color)', borderColor: '#ffffff', borderRadius: '8px', color: '#ffffff' }}
+            labelStyle={{ fontWeight: 'bold', color: '#ffffff', marginBottom: '5px' }}
           />
           {/* Normal range reference lines */}
           <ReferenceLine y={3.9} stroke="#ef4444" strokeDasharray="3 3" />
@@ -38,10 +38,10 @@ export default function GlucoseChart({ data }) {
           <Line 
             type="monotone" 
             dataKey="value" 
-            stroke="var(--button-color)" 
+            stroke="#ffffff" 
             strokeWidth={3}
             activeDot={{ r: 8 }} 
-            dot={{ r: 4, fill: 'var(--button-color)' }}
+            dot={{ r: 4, fill: '#ffffff' }}
           />
         </LineChart>
       </ResponsiveContainer>

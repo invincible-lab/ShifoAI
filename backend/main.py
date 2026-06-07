@@ -23,6 +23,10 @@ from models import (
 )
 from auth import get_user_from_init_data
 from chat_engine import ChatEngine
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from datetime import datetime
+
+scheduler = AsyncIOScheduler()
 
 app = FastAPI(title="ShifoAI API", version="1.0.0")
 
@@ -48,9 +52,34 @@ async def startup():
     await bot_app.start()
     await bot_app.updater.start_polling(drop_pending_updates=True)
     print("Telegram Bot orqa fonda ishga tushdi")
+    
+    from database import get_all_active_reminders
+    async def check_and_send_reminders():
+        now = datetime.now()
+        current_time_str = now.strftime("%H:%M")
+        day_key = now.strftime("%a").lower()[:3] # e.g. 'mon', 'tue'
+        
+        reminders = get_all_active_reminders()
+        for r in reminders:
+            if r['time'] == current_time_str:
+                days = r.get('days_of_week')
+                if not days or day_key in days:
+                    try:
+                        await bot_app.bot.send_message(
+                            chat_id=r['telegram_id'],
+                            text=f"🔔 *Eslatma!* Vaqti keldi:\n\n👉 {r['title']}",
+                            parse_mode="Markdown"
+                        )
+                    except Exception as e:
+                        print(f"Eslatma yuborishda xatolik: {e}")
+                        
+    scheduler.add_job(check_and_send_reminders, 'cron', minute='*')
+    scheduler.start()
+    print("APScheduler ishga tushdi (Har daqiqada tekshiriladi)")
 
 @app.on_event("shutdown")
 async def shutdown():
+    scheduler.shutdown()
     await bot_app.updater.stop()
     await bot_app.stop()
     await bot_app.shutdown()

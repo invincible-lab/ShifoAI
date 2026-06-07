@@ -57,11 +57,14 @@ export default function RemindersPage() {
         days_of_week: form.days_of_week.length ? form.days_of_week : null,
       });
       haptic('success');
+      alert("Eslatma muvaffaqiyatli saqlandi!");
       setForm({ kind: 'medication', title: '', time: '08:00', days_of_week: [] });
       setShowForm(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       load();
     } catch (err) {
       haptic('error');
+      alert("Xato: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -72,17 +75,20 @@ export default function RemindersPage() {
     setReminders(prev => prev.map(x => x.id === r.id ? { ...x, active: !x.active } : x));
     try {
       await api.toggleReminder(r.id, !r.active);
-    } catch {
+    } catch (err) {
+      alert("Xato: " + err.message);
       load();
     }
   };
 
   const handleDelete = async (r) => {
     haptic('warning');
+    if (!window.confirm("Rostdan ham o'chirmoqchimisiz?")) return;
     setReminders(prev => prev.filter(x => x.id !== r.id));
     try {
       await api.deleteReminder(r.id);
-    } catch {
+    } catch (err) {
+      alert("Xato: " + err.message);
       load();
     }
   };
@@ -143,6 +149,7 @@ export default function RemindersPage() {
               type="time"
               className="input-field"
               value={form.time}
+              style={{ display: 'block', width: '100%', paddingRight: '40px' }}
               onChange={(e) => setForm(prev => ({ ...prev, time: e.target.value }))}
               required
             />

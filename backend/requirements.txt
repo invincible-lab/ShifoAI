@@ -6,3 +6,4 @@ chromadb
 python-dotenv
 pydantic
 psycopg2-binary
+APScheduler
