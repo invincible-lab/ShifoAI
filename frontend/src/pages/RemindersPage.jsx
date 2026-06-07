@@ -57,7 +57,6 @@ export default function RemindersPage() {
         days_of_week: form.days_of_week.length ? form.days_of_week : null,
       });
       haptic('success');
-      alert("Eslatma muvaffaqiyatli saqlandi!");
       setForm({ kind: 'medication', title: '', time: '08:00', days_of_week: [] });
       setShowForm(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -149,7 +148,6 @@ export default function RemindersPage() {
               type="time"
               className="input-field"
               value={form.time}
-              style={{ display: 'block', width: '100%', paddingRight: '40px' }}
               onChange={(e) => setForm(prev => ({ ...prev, time: e.target.value }))}
               required
             />
