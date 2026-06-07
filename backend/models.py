@@ -41,3 +41,12 @@ class GlucoseResponse(BaseModel):
     unit: str
     reading_time: str
     meal_context: Optional[str]
+
+class ReminderRequest(BaseModel):
+    kind: str
+    title: str
+    time: str
+    days_of_week: Optional[List[str]] = None
+
+class ReminderToggleRequest(BaseModel):
+    active: bool

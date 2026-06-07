@@ -87,6 +87,17 @@ def init_db():
             reading_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             meal_context TEXT CHECK(meal_context IN ('fasting','before_meal','after_meal','bedtime'))
         );
+
+        CREATE TABLE IF NOT EXISTS reminders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL REFERENCES users(id),
+            kind TEXT NOT NULL CHECK(kind IN ('medication','glucose_check','appointment')),
+            title TEXT NOT NULL,
+            time TEXT NOT NULL,
+            days_of_week TEXT,
+            active INTEGER DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
     """)
     conn.close()
     print("Muvaffaqiyatli: Ma'lumotlar bazasi tayyor")
@@ -261,3 +272,49 @@ def get_glucose_stats(user_id, days=7):
         "max": round(max(values), 1),
         "in_range_percent": round(in_range / len(values) * 100, 1)
     }
+
+# --- Reminder sinfi metodlari ---
+
+def create_reminder(user_id, kind, title, time, days_of_week=None):
+    """save() — yangi eslatma yaratish"""
+    conn = get_connection()
+    days_str = json.dumps(days_of_week, ensure_ascii=False) if isinstance(days_of_week, list) else days_of_week
+    execute_query(
+        conn,
+        "INSERT INTO reminders (user_id, kind, title, time, days_of_week) VALUES (?, ?, ?, ?, ?)",
+        (user_id, kind, title, time, days_str),
+        commit=True
+    )
+    conn.close()
+
+def get_reminders(user_id):
+    """get_all() — foydalanuvchi eslatmalari ro'yxati"""
+    conn = get_connection()
+    cursor = execute_query(conn, "SELECT * FROM reminders WHERE user_id = ? ORDER BY time ASC", (user_id,))
+    reminders = [dict(r) for r in cursor.fetchall()]
+    conn.close()
+    for r in reminders:
+        if r.get('days_of_week'):
+            try:
+                r['days_of_week'] = json.loads(r['days_of_week'])
+            except (TypeError, ValueError):
+                pass
+        r['active'] = bool(r.get('active'))
+    return reminders
+
+def toggle_reminder(user_id, reminder_id, active):
+    """update() — eslatmani yoqish/o'chirish"""
+    conn = get_connection()
+    execute_query(
+        conn,
+        "UPDATE reminders SET active = ? WHERE id = ? AND user_id = ?",
+        (1 if active else 0, reminder_id, user_id),
+        commit=True
+    )
+    conn.close()
+
+def delete_reminder(user_id, reminder_id):
+    """delete() — eslatmani o'chirish"""
+    conn = get_connection()
+    execute_query(conn, "DELETE FROM reminders WHERE id = ? AND user_id = ?", (reminder_id, user_id), commit=True)
+    conn.close()

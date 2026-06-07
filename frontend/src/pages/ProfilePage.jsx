@@ -47,7 +47,8 @@ export default function ProfilePage() {
 
   return (
     <div className="page-container">
-      <h2 style={{ marginBottom: '24px', fontWeight: '700', letterSpacing: '-0.5px' }}>👤 Shaxsiy Profil</h2>
+      <h2 className="page-title">👤 Shaxsiy profil</h2>
+      <p className="page-subtitle">Tibbiy ma'lumotlaringiz — AI tavsiyalarini shaxsiylashtirish uchun</p>
       
       {message && <AlertBanner type={message.includes('Xato') ? 'danger' : 'success'} message={message} />}
       

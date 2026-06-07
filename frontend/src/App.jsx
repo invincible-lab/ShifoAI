@@ -3,8 +3,10 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { initTelegram, getUser } from './telegram.js';
 import { api } from './api.js';
 import NavBar from './components/NavBar.jsx';
+import DashboardPage from './pages/DashboardPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import GlucosePage from './pages/GlucosePage.jsx';
+import RemindersPage from './pages/RemindersPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import FoodPage from './pages/FoodPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -53,9 +55,11 @@ export default function App() {
     <HashRouter>
       <div className="app">
         <Routes>
-          <Route path="/" element={<Navigate to="/chat" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<DashboardPage user={user} />} />
           <Route path="/chat" element={<ChatPage user={user} />} />
           <Route path="/glucose" element={<GlucosePage />} />
+          <Route path="/reminders" element={<RemindersPage />} />
           <Route path="/food" element={<FoodPage user={user} />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
           <Route path="/register" element={<RegisterPage onComplete={() => setRegistered(true)} />} />

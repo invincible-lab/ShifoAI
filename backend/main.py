@@ -13,11 +13,13 @@ from config import TELEGRAM_BOT_TOKEN
 from database import (
     init_db, get_or_create_user, get_user_by_telegram_id,
     update_medical_profile, get_medical_profile, get_chat_history,
-    save_glucose, get_glucose_readings, get_glucose_stats, calculate_bmi
+    save_glucose, get_glucose_readings, get_glucose_stats, calculate_bmi,
+    create_reminder, get_reminders, toggle_reminder, delete_reminder
 )
 from models import (
     ChatRequest, ChatResponse, GlucoseRequest,
-    MedicalProfileRequest, RegisterRequest
+    MedicalProfileRequest, RegisterRequest,
+    ReminderRequest, ReminderToggleRequest
 )
 from auth import get_user_from_init_data
 from chat_engine import ChatEngine
@@ -154,6 +156,39 @@ async def update_profile(
     kwargs = data.model_dump(exclude_none=True)
     if kwargs:
         update_medical_profile(user['id'], **kwargs)
+    return {"success": True}
+
+@app.get("/api/reminders")
+async def list_reminders(x_telegram_init_data: Optional[str] = Header(None)):
+    user = get_current_user(x_telegram_init_data)
+    return {"reminders": get_reminders(user['id'])}
+
+@app.post("/api/reminders")
+async def add_reminder(
+    data: ReminderRequest,
+    x_telegram_init_data: Optional[str] = Header(None)
+):
+    user = get_current_user(x_telegram_init_data)
+    create_reminder(user['id'], data.kind, data.title, data.time, data.days_of_week)
+    return {"success": True}
+
+@app.put("/api/reminders/{reminder_id}")
+async def update_reminder(
+    reminder_id: int,
+    data: ReminderToggleRequest,
+    x_telegram_init_data: Optional[str] = Header(None)
+):
+    user = get_current_user(x_telegram_init_data)
+    toggle_reminder(user['id'], reminder_id, data.active)
+    return {"success": True}
+
+@app.delete("/api/reminders/{reminder_id}")
+async def remove_reminder(
+    reminder_id: int,
+    x_telegram_init_data: Optional[str] = Header(None)
+):
+    user = get_current_user(x_telegram_init_data)
+    delete_reminder(user['id'], reminder_id)
     return {"success": True}
 
 @app.get("/health")

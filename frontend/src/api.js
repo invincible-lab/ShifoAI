@@ -32,4 +32,9 @@ export const api = {
 
   getProfile: () => request('GET', '/profile'),
   updateProfile: (data) => request('PUT', '/profile', data),
+
+  getReminders: () => request('GET', '/reminders'),
+  addReminder: (data) => request('POST', '/reminders', data),
+  toggleReminder: (id, active) => request('PUT', `/reminders/${id}`, { active }),
+  deleteReminder: (id) => request('DELETE', `/reminders/${id}`),
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { CheckCircle, XCircle, Sparkles } from 'lucide-react';
 import { haptic } from '../telegram';
 
 export default function FoodPage() {
@@ -10,8 +10,23 @@ export default function FoodPage() {
 
   return (
     <div className="page-container">
-      <h2 style={{ marginBottom: '24px', fontWeight: '700', letterSpacing: '-0.5px' }}>🍎 Ovqatlanish</h2>
-      
+      <h2 className="page-title">🍎 Ovqatlanish</h2>
+      <p className="page-subtitle">Qandli diabet uchun ovqatlanish bo'yicha umumiy tavsiyalar</p>
+
+      <div className="glass-card" style={{ borderLeft: '4px solid var(--app-primary)' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <div style={{ width: '38px', height: '38px', borderRadius: '14px', background: 'var(--app-primary-gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 6px 16px rgba(79,70,229,0.3)' }}>
+            <Sparkles size={18} color="#fff" />
+          </div>
+          <div>
+            <p style={{ fontWeight: '700', fontSize: '14px', marginBottom: '4px' }}>Shaxsiy tavsiya kerakmi?</p>
+            <p style={{ fontSize: '14px', color: 'var(--tg-hint-color)', lineHeight: '1.6' }}>
+              Tibbiy profilingiz va glyukoza ko'rsatkichlaringizni hisobga olib, ovqatlanish bo'yicha shaxsiy maslahat olish uchun ShifoAI chatiga yozing.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="glass-card" style={{ borderLeft: '4px solid var(--success-color)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', color: 'var(--success-color)' }}>
           <CheckCircle size={22} />
