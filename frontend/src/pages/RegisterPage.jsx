@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../api';
+import { haptic } from '../telegram';
+import { Activity } from 'lucide-react';
 
 export default function RegisterPage({ onComplete }) {
   const [formData, setFormData] = useState({
@@ -16,12 +18,15 @@ export default function RegisterPage({ onComplete }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    haptic('light');
     setLoading(true);
     try {
       await api.register({ full_name: formData.full_name, age: parseInt(formData.age) });
       await api.updateProfile({ diabetes_type: formData.diabetes_type });
+      haptic('success');
       onComplete();
     } catch (error) {
+      haptic('error');
       console.error(error);
     } finally {
       setLoading(false);
@@ -30,12 +35,17 @@ export default function RegisterPage({ onComplete }) {
 
   return (
     <div className="page-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '24px', color: 'var(--button-color)', marginBottom: '8px' }}>ShifoAI</h1>
-        <p style={{ color: 'var(--hint-color)' }}>Xush kelibsiz! Iltimos, o'zingiz haqingizda ma'lumot kiriting.</p>
+      <div style={{ textAlign: 'center', marginBottom: '32px', animation: 'fadeIn 0.6s ease' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+          <div style={{ background: 'var(--app-primary-gradient)', padding: '16px', borderRadius: '24px', color: '#fff', boxShadow: '0 8px 24px rgba(16, 185, 129, 0.3)' }}>
+            <Activity size={40} />
+          </div>
+        </div>
+        <h1 style={{ fontSize: '28px', fontWeight: '800', color: 'var(--tg-text-color)', marginBottom: '8px', letterSpacing: '-0.5px' }}>ShifoAI</h1>
+        <p style={{ color: 'var(--tg-hint-color)', fontSize: '15px' }}>Xush kelibsiz! Iltimos, o'zingiz haqingizda ma'lumot kiriting.</p>
       </div>
 
-      <form onSubmit={handleSubmit} style={{ backgroundColor: 'var(--secondary-bg-color)', padding: '20px', borderRadius: '16px' }}>
+      <form onSubmit={handleSubmit} className="glass-card">
         <label className="form-label">To'liq ismingiz</label>
         <input
           type="text"
@@ -43,6 +53,7 @@ export default function RegisterPage({ onComplete }) {
           className="input-field"
           value={formData.full_name}
           onChange={handleChange}
+          placeholder="Ism va familiya"
           required
         />
 
@@ -53,6 +64,7 @@ export default function RegisterPage({ onComplete }) {
           className="input-field"
           value={formData.age}
           onChange={handleChange}
+          placeholder="Masalan: 45"
           required
         />
 
@@ -69,7 +81,7 @@ export default function RegisterPage({ onComplete }) {
           <option value="other">Boshqa / Bilmayman</option>
         </select>
 
-        <button type="submit" className="btn" style={{ marginTop: '8px' }} disabled={loading}>
+        <button type="submit" className="btn" style={{ marginTop: '16px' }} disabled={loading}>
           {loading ? 'Saqlanmoqda...' : 'Boshlash'}
         </button>
       </form>

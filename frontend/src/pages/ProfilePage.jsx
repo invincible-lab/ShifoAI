@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../api';
 import AlertBanner from '../components/AlertBanner';
+import { haptic } from '../telegram';
+import Loading from '../components/Loading';
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState({});
   const [user, setUser] = useState({});
   const [bmi, setBmi] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -14,17 +17,21 @@ export default function ProfilePage() {
       if (res.medical_profile) setProfile(res.medical_profile);
       if (res.user) setUser(res.user);
       if (res.bmi) setBmi(res.bmi);
-    });
+      setInitialLoad(false);
+    }).catch(() => setInitialLoad(false));
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    haptic('light');
     setLoading(true);
     try {
       await api.updateProfile(profile);
+      haptic('success');
       setMessage("Profil muvaffaqiyatli saqlandi!");
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
+      haptic('error');
       setMessage("Xatolik yuz berdi");
     } finally {
       setLoading(false);
@@ -36,13 +43,15 @@ export default function ProfilePage() {
     setProfile(prev => ({ ...prev, [name]: value }));
   };
 
+  if (initialLoad) return <Loading type="skeleton" />;
+
   return (
     <div className="page-container">
-      <h2 style={{ marginBottom: '20px' }}>👤 Shaxsiy Profil</h2>
+      <h2 style={{ marginBottom: '24px', fontWeight: '700', letterSpacing: '-0.5px' }}>👤 Shaxsiy Profil</h2>
       
       {message && <AlertBanner type={message.includes('Xato') ? 'danger' : 'success'} message={message} />}
       
-      <form onSubmit={handleSubmit} style={{ backgroundColor: 'var(--secondary-bg-color)', padding: '16px', borderRadius: '12px' }}>
+      <form onSubmit={handleSubmit} className="glass-card">
         <label className="form-label">Diabet turi</label>
         <select 
           name="diabetes_type" 
@@ -67,7 +76,7 @@ export default function ProfilePage() {
           placeholder="Masalan: Metformin, Insulin glargin"
         />
 
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: '16px' }}>
           <div style={{ flex: 1 }}>
             <label className="form-label">Bo'y (sm)</label>
             <input
@@ -101,12 +110,12 @@ export default function ProfilePage() {
         />
         
         {bmi && (
-          <div style={{ padding: '12px', backgroundColor: 'var(--bg-color)', borderRadius: '8px', marginBottom: '16px', fontSize: '14px' }}>
-            <strong>Tana vazni indeksi (BMI):</strong> {bmi.bmi} ({bmi.category})
+          <div style={{ padding: '16px', background: 'var(--tg-bg-color)', borderRadius: '14px', marginBottom: '20px', fontSize: '14px', border: '1px solid var(--tg-secondary-bg-color)' }}>
+            <strong>Tana vazni indeksi (BMI):</strong> <span style={{ color: 'var(--app-primary)', fontWeight: 'bold' }}>{bmi.bmi}</span> ({bmi.category})
           </div>
         )}
 
-        <button type="submit" className="btn" disabled={loading}>
+        <button type="submit" className="btn" disabled={loading} style={{ marginTop: '8px' }}>
           {loading ? 'Saqlanmoqda...' : 'Saqlash'}
         </button>
       </form>
