@@ -24,7 +24,8 @@ from models import (
 from auth import get_user_from_init_data
 from chat_engine import ChatEngine
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+UZ_TZ = timezone(timedelta(hours=5))
 
 scheduler = AsyncIOScheduler()
 
@@ -57,7 +58,7 @@ async def startup():
     _last_sent = {}  # {reminder_id: "HH:MM"} — takroran yuborishni oldini olish
     
     async def check_and_send_reminders():
-        now = datetime.now()
+        now = datetime.now(UZ_TZ)
         current_time_str = now.strftime("%H:%M")
         day_key = now.strftime("%a").lower()[:3] # e.g. 'mon', 'tue'
         

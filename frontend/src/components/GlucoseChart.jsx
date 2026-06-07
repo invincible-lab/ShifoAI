@@ -12,7 +12,9 @@ export default function GlucoseChart({ data }) {
 
   // Format data for recharts
   const chartData = data.map(item => {
-    const date = new Date(item.reading_time);
+    // Backend SQLite CURRENT_TIMESTAMP returns "YYYY-MM-DD HH:MM:SS" in UTC.
+    const timeStr = item.reading_time.replace(' ', 'T') + (item.reading_time.includes('Z') ? '' : 'Z');
+    const date = new Date(timeStr);
     return {
       time: `${date.getDate()}/${date.getMonth()+1} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`,
       value: item.value,

@@ -1,7 +1,7 @@
 import sqlite3
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from config import DATABASE_PATH, DATABASE_URL
 
 IS_POSTGRES = bool(DATABASE_URL and DATABASE_URL.startswith("postgres"))
@@ -251,7 +251,7 @@ def save_glucose(user_id, value, meal_context=None, unit='mmol/L'):
 def get_glucose_readings(user_id, days=30):
     """get_trend() uchun"""
     conn = get_connection()
-    since = (datetime.now() - timedelta(days=days)).isoformat()
+    since = (datetime.utcnow() - timedelta(days=days)).isoformat()
     cursor = execute_query(conn, "SELECT * FROM glucose_readings WHERE user_id = ? AND reading_time >= ? ORDER BY reading_time ASC", (user_id, since))
     readings = [dict(r) for r in cursor.fetchall()]
     conn.close()
