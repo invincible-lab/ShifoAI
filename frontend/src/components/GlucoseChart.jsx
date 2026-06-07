@@ -11,14 +11,14 @@ export default function GlucoseChart({ data }) {
   }
 
   // Format data for recharts
-  const chartData = data.map(item => {
+  const chartData = [...data].reverse().map(item => {
     const date = new Date(item.reading_time);
     return {
       time: `${date.getDate()}/${date.getMonth()+1} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`,
       value: item.value,
       context: item.meal_context
     };
-  }).reverse(); // Show chronological
+  });
 
   return (
     <div style={{ width: '100%', height: 300, backgroundColor: 'var(--bg-color)', padding: '10px 0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', marginBottom: '20px' }}>

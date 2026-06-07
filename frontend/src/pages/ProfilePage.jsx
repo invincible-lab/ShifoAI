@@ -36,6 +36,10 @@ export default function ProfilePage() {
       if (typeof payload.medications === 'string') {
         payload.medications = payload.medications.split(',').map(s => s.trim()).filter(Boolean);
       }
+      // Raqamli maydonlarni number ga aylantirish (form string qaytaradi)
+      if (payload.height) payload.height = parseFloat(payload.height);
+      if (payload.weight) payload.weight = parseFloat(payload.weight);
+      if (payload.hba1c_latest) payload.hba1c_latest = parseFloat(payload.hba1c_latest);
       
       await api.updateProfile(payload);
       haptic('success');

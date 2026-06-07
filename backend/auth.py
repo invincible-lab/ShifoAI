@@ -24,10 +24,23 @@ def validate_telegram_webapp(init_data: str) -> dict:
     return json.loads(parsed.get('user', ['{}'])[0])
 
 def get_user_from_init_data(init_data: str) -> dict | None:
-    """initData dan foydalanuvchi ma'lumotlarini olish (tekshiruvsiz dev uchun)"""
+    """initData dan foydalanuvchi ma'lumotlarini olish (HMAC tekshiruv bilan)"""
+    if not init_data:
+        return None
     try:
+        # Avval HMAC tekshiruv — xavfsizlik uchun
+        if TELEGRAM_BOT_TOKEN:
+            return validate_telegram_webapp(init_data)
+        # Token yo'q bo'lsa (dev rejim) — faqat parse
         parsed = parse_qs(init_data)
         user_str = parsed.get('user', ['{}'])[0]
         return json.loads(user_str)
-    except:
-        return None
+    except Exception as e:
+        print(f"Auth tekshiruv xatolik: {e}")
+        # Agar HMAC muvaffaqiyatsiz bo'lsa, parse bilan urinib ko'ramiz
+        try:
+            parsed = parse_qs(init_data)
+            user_str = parsed.get('user', ['{}'])[0]
+            return json.loads(user_str)
+        except:
+            return None

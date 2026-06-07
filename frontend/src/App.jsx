@@ -66,7 +66,7 @@ export default function App() {
           <Route path="/food" element={registered ? <FoodPage user={user} /> : <Navigate to="/register" replace />} />
           <Route path="/profile" element={registered ? <ProfilePage user={user} /> : <Navigate to="/register" replace />} />
         </Routes>
-        <NavBar />
+        {registered && <NavBar />}
       </div>
     </HashRouter>
   );

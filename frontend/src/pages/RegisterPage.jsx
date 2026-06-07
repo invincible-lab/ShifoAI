@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { haptic } from '../telegram';
 import { Activity } from 'lucide-react';
 
 export default function RegisterPage({ onComplete }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     full_name: '',
     age: '',
@@ -25,6 +27,7 @@ export default function RegisterPage({ onComplete }) {
       await api.updateProfile({ diabetes_type: formData.diabetes_type });
       haptic('success');
       onComplete();
+      navigate('/dashboard', { replace: true });
     } catch (error) {
       haptic('error');
       console.error(error);

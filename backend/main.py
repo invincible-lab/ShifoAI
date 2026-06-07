@@ -54,6 +54,8 @@ async def startup():
     print("Telegram Bot orqa fonda ishga tushdi")
     
     from database import get_all_active_reminders
+    _last_sent = {}  # {reminder_id: "HH:MM"} — takroran yuborishni oldini olish
+    
     async def check_and_send_reminders():
         now = datetime.now()
         current_time_str = now.strftime("%H:%M")
@@ -62,6 +64,9 @@ async def startup():
         reminders = get_all_active_reminders()
         for r in reminders:
             if r['time'] == current_time_str:
+                # Agar bu daqiqada allaqachon yuborilgan bo'lsa, qayta yubormaslik
+                if _last_sent.get(r['id']) == current_time_str:
+                    continue
                 days = r.get('days_of_week')
                 if not days or day_key in days:
                     try:
@@ -70,8 +75,12 @@ async def startup():
                             text=f"🔔 *Eslatma!* Vaqti keldi:\n\n👉 {r['title']}",
                             parse_mode="Markdown"
                         )
+                        _last_sent[r['id']] = current_time_str
                     except Exception as e:
                         print(f"Eslatma yuborishda xatolik: {e}")
+            else:
+                # Vaqt o'tganda eski yozuvlarni tozalash
+                _last_sent.pop(r['id'], None)
                         
     scheduler.add_job(check_and_send_reminders, 'cron', minute='*')
     scheduler.start()
@@ -162,7 +171,7 @@ async def get_glucose(
 ):
     user = get_current_user(x_telegram_init_data)
     readings = get_glucose_readings(user['id'], days=days)
-    stats = get_glucose_stats(user['id'], days=7)
+    stats = get_glucose_stats(user['id'], days=days)
     return {"readings": readings, "stats": stats}
 
 @app.get("/api/profile")
