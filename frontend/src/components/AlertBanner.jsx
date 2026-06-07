@@ -5,7 +5,8 @@ export default function AlertBanner({ type, message }) {
   if (!message) return null;
 
   const isDanger = type === 'danger' || message.toLowerCase().includes('gipo') || message.toLowerCase().includes('giper');
-  const bgColor = isDanger ? 'var(--danger-color)' : 'var(--warning-color)';
+  const isSuccess = type === 'success';
+  const bgColor = isDanger ? 'var(--danger-color)' : isSuccess ? 'var(--success-color)' : 'var(--warning-color)';
   const textColor = '#fff';
 
   return (

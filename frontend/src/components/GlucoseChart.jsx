@@ -11,7 +11,7 @@ export default function GlucoseChart({ data }) {
   }
 
   // Format data for recharts
-  const chartData = [...data].reverse().map(item => {
+  const chartData = data.map(item => {
     const date = new Date(item.reading_time);
     return {
       time: `${date.getDate()}/${date.getMonth()+1} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`,
@@ -21,7 +21,7 @@ export default function GlucoseChart({ data }) {
   });
 
   return (
-    <div style={{ width: '100%', height: 300, backgroundColor: 'var(--bg-color)', padding: '10px 0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', marginBottom: '20px' }}>
+    <div style={{ width: '100%', height: 300, backgroundColor: 'var(--tg-bg-color)', padding: '10px 0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', marginBottom: '20px' }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#ffffff" opacity={0.2} />
