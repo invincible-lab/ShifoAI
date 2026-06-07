@@ -3,6 +3,14 @@ const tg = window.Telegram?.WebApp;
 export const initTelegram = () => {
   tg?.ready();
   tg?.expand();
+  
+  const applyTheme = () => {
+    const theme = tg?.colorScheme || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  };
+  
+  applyTheme();
+  tg?.onEvent('themeChanged', applyTheme);
 };
 
 export const getInitData = () => tg?.initData || "";
