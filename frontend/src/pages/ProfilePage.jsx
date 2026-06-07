@@ -40,6 +40,18 @@ export default function ProfilePage() {
       await api.updateProfile(payload);
       haptic('success');
       setMessage("Profil muvaffaqiyatli saqlandi!");
+      
+      // Yangilangan ma'lumotlarni serverdan qayta yuklash (BMI va hokazo)
+      const res = await api.getProfile();
+      if (res.medical_profile) {
+        const p = res.medical_profile;
+        if (Array.isArray(p.medications)) p.medications = p.medications.join(', ');
+        setProfile(p);
+      }
+      if (res.user) setUser(res.user);
+      if (res.bmi) setBmi(res.bmi);
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       haptic('error');

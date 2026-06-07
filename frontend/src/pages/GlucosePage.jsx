@@ -110,6 +110,7 @@ export default function GlucosePage() {
       setWarning(res.warning);
       setValue('');
       setShowForm(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       loadData(period);
     } catch (error) {
       haptic('error');
