@@ -55,14 +55,16 @@ export default function App() {
     <HashRouter>
       <div className="app">
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<DashboardPage user={user} />} />
-          <Route path="/chat" element={<ChatPage user={user} />} />
-          <Route path="/glucose" element={<GlucosePage />} />
-          <Route path="/reminders" element={<RemindersPage />} />
-          <Route path="/food" element={<FoodPage user={user} />} />
-          <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route path="/" element={<Navigate to={registered ? "/dashboard" : "/register"} replace />} />
           <Route path="/register" element={<RegisterPage onComplete={() => setRegistered(true)} />} />
+          
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={registered ? <DashboardPage user={user} /> : <Navigate to="/register" replace />} />
+          <Route path="/chat" element={registered ? <ChatPage user={user} /> : <Navigate to="/register" replace />} />
+          <Route path="/glucose" element={registered ? <GlucosePage /> : <Navigate to="/register" replace />} />
+          <Route path="/reminders" element={registered ? <RemindersPage /> : <Navigate to="/register" replace />} />
+          <Route path="/food" element={registered ? <FoodPage user={user} /> : <Navigate to="/register" replace />} />
+          <Route path="/profile" element={registered ? <ProfilePage user={user} /> : <Navigate to="/register" replace />} />
         </Routes>
         <NavBar />
       </div>

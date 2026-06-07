@@ -14,7 +14,8 @@ async function request(method, path, body = null) {
   const res = await fetch(`${BASE_URL}${path}`, options);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: 'Xatolik yuz berdi' }));
-    throw new Error(err.detail || 'So\'rov muvaffaqiyatsiz');
+    const errorMsg = typeof err.detail === 'string' ? err.detail : JSON.stringify(err.detail);
+    throw new Error(errorMsg || 'So\'rov muvaffaqiyatsiz');
   }
   return res.json();
 }

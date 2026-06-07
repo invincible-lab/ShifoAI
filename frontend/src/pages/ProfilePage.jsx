@@ -14,7 +14,13 @@ export default function ProfilePage() {
 
   useEffect(() => {
     api.getProfile().then(res => {
-      if (res.medical_profile) setProfile(res.medical_profile);
+      if (res.medical_profile) {
+        const p = res.medical_profile;
+        if (Array.isArray(p.medications)) {
+          p.medications = p.medications.join(', ');
+        }
+        setProfile(p);
+      }
       if (res.user) setUser(res.user);
       if (res.bmi) setBmi(res.bmi);
       setInitialLoad(false);
@@ -26,13 +32,18 @@ export default function ProfilePage() {
     haptic('light');
     setLoading(true);
     try {
-      await api.updateProfile(profile);
+      const payload = { ...profile };
+      if (typeof payload.medications === 'string') {
+        payload.medications = payload.medications.split(',').map(s => s.trim()).filter(Boolean);
+      }
+      
+      await api.updateProfile(payload);
       haptic('success');
       setMessage("Profil muvaffaqiyatli saqlandi!");
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       haptic('error');
-      setMessage("Xatolik yuz berdi");
+      setMessage("Xato: " + error.message);
     } finally {
       setLoading(false);
     }

@@ -60,8 +60,8 @@ export default function ChatPage({ user }) {
   };
 
   return (
-    <div className="page-container" style={{ display: 'flex', flexDirection: 'column', paddingBottom: '90px', height: '100%' }}>
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '20px' }}>
+    <div className="page-container" style={{ display: 'flex', flexDirection: 'column', paddingBottom: '10px', height: '100%' }}>
+      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '130px' }}>
         {messages.length === 0 ? (
           <div style={{ textAlign: 'center', marginTop: '24px', animation: 'fadeIn 0.5s ease' }}>
             <div style={{ width: '64px', height: '64px', borderRadius: '22px', background: 'var(--app-primary-gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', boxShadow: '0 10px 28px rgba(79,70,229,0.32)' }}>
