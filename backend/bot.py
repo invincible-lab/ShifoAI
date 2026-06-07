@@ -31,12 +31,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         full_name=user.full_name
     )
 
-    # Mini App ochish tugmasi (ReplyKeyboard)
-    webapp_keyboard = ReplyKeyboardMarkup(
-        [[KeyboardButton("🏥 ShifoAI Mini App", web_app=WebAppInfo(url=WEBAPP_URL))]],
-        resize_keyboard=True
-    )
-
+    from telegram import ReplyKeyboardRemove
+    
     await update.message.reply_text(
         f"👋 Salom, {user.first_name}!\n\n"
         "🏥 *ShifoAI* — qandli diabet bo'yicha intellektual maslahatchi\n\n"
@@ -45,10 +41,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "• 📊 Glyukoza darajasini kuzatish\n"
         "• 🍎 Ovqatlanish bo'yicha maslahatlar\n"
         "• 💊 Dori-darmonlar haqida ma'lumot\n\n"
-        "⬇️ Quyidagi tugma orqali ilovani oching yoki shunchaki savolingizni yozing!\n\n"
+        "⬇️ Chatning quyi chap burchagidagi tugma orqali ilovani oching yoki shunchaki savolingizni yozing!\n\n"
         "⚠️ *Eslatma:* Men shifokor emasman. Muhim tibbiy masalalar uchun mutaxassisga murojaat qiling.",
         parse_mode='Markdown',
-        reply_markup=webapp_keyboard
+        reply_markup=ReplyKeyboardRemove()
     )
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
